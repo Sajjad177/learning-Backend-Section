@@ -6,7 +6,5 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World! Bangladesh");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+export default app
 
