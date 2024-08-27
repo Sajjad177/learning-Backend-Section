@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/api/movies", MovieRoutes);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World! Bangladesh");
+  res.send("Hello World! Movie Review website server");
 });
 
 export default app;
