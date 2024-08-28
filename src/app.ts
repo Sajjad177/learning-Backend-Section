@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { MovieRoutes } from "./modules/movies/movie.route";
 
-
 const app = express();
 
 // Setup parser ->
@@ -14,3 +13,4 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 export default app;
+
