@@ -35,9 +35,9 @@ const movieSchema = new Schema<Movie>({
   reviews: {
     type: [reviewSchema],
   },
-//   slug: {
-//     type: String,
-//   },
+  slug: {
+    type: String,
+  },
   isDeleted: {
     type: Boolean,
     default: false,

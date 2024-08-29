@@ -66,8 +66,37 @@ const getSingleData = async (req: Request, res: Response) => {
   }
 };
 
+
+// TODO : Get singleData with slug -> :
+
+const getMovieBySlug = async (req: Request, res: Response) => {
+  try {
+    const { slug } = req.params;
+    const result = await MovieServices.getMovieBySlug(slug);
+    if (result) {
+      res.status(200).json({
+        success: true,
+        message: "Movie retrieved successfully",
+        data: result,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Movie not found",
+      });
+    }
+  } catch (error) {
+    console.error("Error retrieving movie:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve movie",
+    });
+  }
+};
+
 export const MovieControllers = {
   createMovies,
   getAllMovies,
   getSingleData,
+  getMovieBySlug,
 };

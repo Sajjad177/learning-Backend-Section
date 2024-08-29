@@ -12,6 +12,7 @@ export interface Movie {
   isDeleted: boolean;
   viewCount: number;
   reviews: Review[];
+  slug :string,
 }
 
 
