@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { Movie, Review } from "./movies.interface";
+import { Movie, MovieMethod, MovieModel, Review } from "./movies.interface";
 import { format } from "date-fns";
 import slugify from "slugify";
 
@@ -18,7 +18,7 @@ const reviewSchema = new Schema<Review>({
   },
 });
 
-const movieSchema = new Schema<Movie>({
+const movieSchema = new Schema<Movie, MovieModel, MovieMethod>({
   title: {
     type: String,
     required: [true, "Title is required"],
@@ -50,15 +50,26 @@ const movieSchema = new Schema<Movie>({
   },
 });
 
-//TODO : Pre-save hook to generate the slug before saving the movie
-movieSchema.pre("save", async function (next) {
-  const date = format(this.releaseDate, "dd-MM-yyyy");
+//TODO Create-1st way [ - Normal way - ] : Pre-save hook to generate the slug before saving the movie
+// movieSchema.pre("save", async function (next) {
+// const date = format(this.releaseDate, "dd-MM-yyyy");
+
+// // create slug ->  [npm is slugify]
+// this.slug = slugify(`${this.title}-${date}`, {
+//   lower: true,
+// });
+// next();
+// });
+
+// TODO -> create - 2nd way : this is mongoose custom method
+movieSchema.method("createSlug", function createSlug(payload: Movie) {
+  const date = format(payload.releaseDate, "dd-MM-yyyy");
 
   // create slug ->  [npm is slugify]
-  this.slug = slugify(`${this.title}-${date}`, {
+  const slug = slugify(`${payload.title}-${date}`, {
     lower: true,
   });
-  next();
+  return slug;
 });
 
-export const Movies = model<Movie>("Movies", movieSchema);
+export const Movies = model<Movie, MovieModel>("Movies", movieSchema);

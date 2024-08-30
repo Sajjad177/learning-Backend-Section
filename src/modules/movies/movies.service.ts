@@ -2,9 +2,14 @@ import { Types } from "mongoose";
 import { Movie } from "./movies.interface";
 import { Movies } from "./movies.model";
 
-
 const createMovie = async (payload: Movie) => {
-  const result = await Movies.create(payload);
+  // const result = await Movies.create(payload);
+
+  //TODO : create - 2nd way : modify interface
+  const result = new Movies(payload);
+  const slug = result.createSlug(payload);
+  result.slug = slug;
+  await result.save(); // database saving
   return result;
 };
 

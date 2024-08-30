@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export interface Review {
   email: string;
   rating: number;
@@ -12,7 +14,12 @@ export interface Movie {
   isDeleted: boolean;
   viewCount: number;
   reviews: Review[];
-  slug :string,
+  slug: string;
 }
 
+//TODO create - 2nd way : Create slug with interface ->
+export type MovieMethod = {
+  createSlug(payload : Movie): string;
+};
 
+export type MovieModel = Model<Movie, Record<string, unknown>, MovieMethod>;
