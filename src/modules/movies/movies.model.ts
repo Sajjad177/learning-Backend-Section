@@ -1,5 +1,7 @@
 import { model, Schema } from "mongoose";
 import { Movie, Review } from "./movies.interface";
+import { format } from "date-fns";
+import slugify from "slugify";
 
 const reviewSchema = new Schema<Review>({
   email: {
@@ -48,63 +50,15 @@ const movieSchema = new Schema<Movie>({
   },
 });
 
+//TODO : Pre-save hook to generate the slug before saving the movie
+movieSchema.pre("save", async function (next) {
+  const date = format(this.releaseDate, "dd-MM-yyyy");
 
+  // create slug ->  [npm is slugify]
+  this.slug = slugify(`${this.title}-${date}`, {
+    lower: true,
+  });
+  next();
+});
 
-export const Movies = model<Movie>("Movies", movieSchema)
-
-
-
-
-
-
-
-// TODO : best way to create schema ->
-// const mongoose = require("mongoose");
-
-// const reviewSchema = new mongoose.Schema({
-//   email: {
-//     type: String,
-//     required: true,
-//     match: /.+\@.+\..+/,
-//   },
-//   rating: {
-//     type: Number,
-//     required: true,
-//     min: 0,
-//     max: 5,
-//   },
-//   comment: {
-//     type: String,
-//     required: true,
-//   },
-// });
-
-// const movieSchema = new mongoose.Schema({
-//   title: {
-//     type: String,
-//     required: true,
-//   },
-//   description: {
-//     type: String,
-//     required: true,
-//   },
-//   releaseDate: {
-//     type: Date,
-//     required: true,
-//   },
-//   genre: {
-//     type: String,
-//     required: true,
-//   },
-//   isDeleted: {
-//     type: Boolean,
-//     default: false,
-//   },
-//   viewCount: {
-//     type: Number,
-//     default: 0,
-//   },
-//   reviews: [reviewSchema],
-// });
-
-// module.exports = mongoose.model("Movie", movieSchema);
+export const Movies = model<Movie>("Movies", movieSchema);

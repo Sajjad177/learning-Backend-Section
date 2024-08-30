@@ -66,7 +66,6 @@ const getSingleData = async (req: Request, res: Response) => {
   }
 };
 
-
 // TODO : Get singleData with slug -> :
 
 const getMovieBySlug = async (req: Request, res: Response) => {

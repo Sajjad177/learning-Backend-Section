@@ -1,17 +1,10 @@
 import { Types } from "mongoose";
 import { Movie } from "./movies.interface";
 import { Movies } from "./movies.model";
-import { compareAsc, format } from "date-fns";
-import slugify from "slugify";
+
 
 const createMovie = async (payload: Movie) => {
-  // title -< releaseDate create slug
-
-  const date = format(payload.releaseDate, "dd-MM-yyyy");
-
-  // create slug ->  [npm is slugify]
-  const slug = slugify(`${payload.title}-${date}`);
-  const result = await Movies.create({ ...payload, slug });
+  const result = await Movies.create(payload);
   return result;
 };
 
