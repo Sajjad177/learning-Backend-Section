@@ -1,22 +1,9 @@
 import { model, Schema } from "mongoose";
-import { Movie, MovieMethod, MovieModel, Review } from "./movies.interface";
+import { Movie, MovieMethod, MovieModel, } from "./movies.interface";
 import { format } from "date-fns";
 import slugify from "slugify";
 
-const reviewSchema = new Schema<Review>({
-  email: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  comment: {
-    type: String,
-    required: true,
-  },
-});
+
 
 const movieSchema = new Schema<Movie, MovieModel, MovieMethod>({
   title: {
@@ -34,9 +21,9 @@ const movieSchema = new Schema<Movie, MovieModel, MovieMethod>({
     type: String,
     required: [true, "Genre is required"],
   },
-  reviews: {
-    type: [reviewSchema],
-  },
+  // reviews: {
+  //   type: [reviewSchema],
+  // },
   slug: {
     type: String,
   },
@@ -48,6 +35,10 @@ const movieSchema = new Schema<Movie, MovieModel, MovieMethod>({
     type: Number,
     default: 0,
   },
+  totalRating : {
+    type : Number,
+    default :0
+  }
 });
 
 //TODO Create-1st way [ - Normal way - ] : Pre-save hook to generate the slug before saving the movie

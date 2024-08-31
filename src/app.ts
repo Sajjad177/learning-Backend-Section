@@ -6,6 +6,7 @@ const app = express();
 // Setup parser ->
 app.use(express.json());
 
+// router
 app.use("/api/movies", MovieRoutes);
 
 app.get("/", (req: Request, res: Response) => {
@@ -15,4 +16,3 @@ app.get("/", (req: Request, res: Response) => {
 export default app;
 
 
-//! Mission-2 : part-4 time -> 22 minutes
