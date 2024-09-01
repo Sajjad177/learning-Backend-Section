@@ -11,7 +11,7 @@ const createMovie = async (payload: Movie) => {
   result.slug = slug;
   await result.save(); // database saving
   return result;
-};
+}; 
 
 const getAllMovies = async () => {
   const result = await Movies.find();
