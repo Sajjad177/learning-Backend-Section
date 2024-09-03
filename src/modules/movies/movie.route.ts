@@ -11,7 +11,7 @@ router.get("/id/:movieId", MovieControllers.getSingleData);
 router.get("/slug/:slug", MovieControllers.getMovieBySlug);
 
 router.post("/:slug/review", ReviewControllers.addReview);
-router.get("/:slug/reviews", ReviewControllers.getAllReviews);
-router.put("/:slug/review", ReviewControllers.getReviewById);
-router.delete("/:slug/review", ReviewControllers.deleteReview);
+// router.get("/:slug/reviews", ReviewControllers.getAllReviews);
+// router.put("/:slug/review", ReviewControllers.getReviewById);
+// router.delete("/:slug/review", ReviewControllers.deleteReview);
 export const MovieRoutes = router;

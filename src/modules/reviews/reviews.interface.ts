@@ -13,4 +13,4 @@ export interface TReview {
 
 
 
-//! Mission-3 :  part-4 time -> 1 minutes
+//! Mission-3 :  part-5 time -> 20 minutes
