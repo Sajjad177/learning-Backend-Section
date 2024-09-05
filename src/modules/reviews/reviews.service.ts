@@ -32,7 +32,6 @@ const addReview = async (
       movie: movie._id,
     }).session(session);
 
-
     // throw new Error("Movie not found")
 
     await Movies.updateOne(
@@ -42,7 +41,7 @@ const addReview = async (
     );
 
     await session.commitTransaction();
-    return review[0]; // Return the first review object from the array
+    return review[0];
   } catch (error) {
     await session.abortTransaction();
     console.error("Error adding review:", error);
