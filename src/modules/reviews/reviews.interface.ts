@@ -7,4 +7,4 @@ export interface TReview {
   comment: string;
 }
 
-//! Mission-3 :  part-8 time -> 3 minutes
+//! Mission-3 :  part-8 time -> 16 minutes

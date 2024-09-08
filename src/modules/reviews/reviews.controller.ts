@@ -1,24 +1,41 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ReviewServices } from "./reviews.service";
+import { catchAsync } from "../../utils/catchAsync";
 
-const addReview = async (req: Request, res: Response) => {
-  try {
+// const addReview = async (req: Request, res: Response) => {
+//   try {
+//     const { slug } = req.params;
+//     const reviewData = req.body;
+//     const result = await ReviewServices.addReview(slug, reviewData);
+//     res.status(200).json({
+//       success: true,
+//       message: "Review created successfully",
+//       data: result,
+//     });
+//   } catch (error) {
+//     console.error("Error creating review:", error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to create review",
+//     });
+//   }
+// };
+
+// TODO: Organized way to handle it ->
+
+const addReview = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { slug } = req.params;
     const reviewData = req.body;
     const result = await ReviewServices.addReview(slug, reviewData);
+
     res.status(200).json({
       success: true,
       message: "Review created successfully",
       data: result,
     });
-  } catch (error) {
-    console.error("Error creating review:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to create review",
-    });
   }
-};
+);
 
 // const getAllReviews = async (req: Request, res: Response) => {
 //   try {
